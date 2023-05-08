@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "WinUI3_IFileDialog (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinUI3_IFileDialog (Unpackaged)": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

@@ -1,0 +1,79 @@
+﻿<Window
+    x:Class="WinUI3_IFileDialog.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI3_IFileDialog"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button x:Name="myButton" Click="myButton_Click">Choose Files</Button>
+    </StackPanel>-->
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <!--<ColumnDefinition Width="10"></ColumnDefinition>-->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"></RowDefinition>
+            <!--<RowDefinition Height="60"></RowDefinition>-->
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <Button x:Name="btnChooseFiles" Click="btnChooseFiles_Click" Margin="5,5,5,5">Choose Files</Button>
+                <Button x:Name="btnChooseDirectory" Click="btnChooseDirectory_Click" Margin="5,5,5,5">Choose Directory</Button>
+                <Button x:Name="btnChooseFilesDirectories" Click="btnChooseFilesDirectories_Click" Margin="5,5,5,5"
+                        Content="Choose Files &amp; Directories&#x0a;     with custom Button">                    
+                </Button>
+                <Button x:Name="btnSaveFile" Click="btnSaveFile_Click" Margin="5,5,5,5">Save File (virtually)</Button>
+            </StackPanel>
+            <ListView x:Name="lvFiles" ItemsSource="{x:Bind files}"
+                Height="400" MinWidth="550" BorderThickness="1" BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}">
+
+                <ListView.Resources>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="Blue" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="Blue" />
+                </ListView.Resources>
+
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="608"/>
+                                <!--<ColumnDefinition Width="360"/>-->
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="File name" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                            <!--<TextBlock Grid.Column="1" Text="File Name" Style="{ThemeResource CaptionTextBlockStyle}"/>-->
+                            <TextBlock Grid.Column="2" Text="Type" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="TableDataTemplate" x:DataType="local:File">
+                        <Grid Height="48" AutomationProperties.Name="{x:Bind Name}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="560"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <!--<Ellipse Height="32" Width="32" VerticalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="Assets/Butterfly.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>-->
+                            <Image Source="{x:Bind biFileThumbnail}" MaxWidth="32" MaxHeight="32" Stretch="Fill"/>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Name}" />
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{x:Bind Type}"/>                           
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>
